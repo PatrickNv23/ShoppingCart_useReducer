@@ -1,59 +1,59 @@
 import { useReducer } from 'react';
 import './App.css'
-import ProductoItem from './components/ProductoItem';
-import ProductoCarritoCompras from './components/ProductoCarritoCompras';
-import { reducerCarrito, productosTienda } from './reducers/carritocompra_reducer';
+import ProductItem from './components/ProductItem';
+import ShoppingCartProduct from './components/ShoppingCartProduct';
+import { reducerCart, productsInitialState } from './reducers/shoppingCart_reducer';
 import TYPES from './reducers/actionTypes';
 
 function App() {
 
-  const [state, dispatch] = useReducer(reducerCarrito, productosTienda);
+  const [state, dispatch] = useReducer(reducerCart, productsInitialState);
 
-  const añadirAlCarrito = (id) => {
+  const addToCart = (id) => {
     dispatch({
-      type: TYPES.AGREGAR_AL_CARRITO,
+      type: TYPES.ADD_TO_CART,
       payload: id
     })
   }
 
-  const eliminarDelCarrito = (id) => {
+  const deleteFromCart = (id) => {
     dispatch({
-      type: TYPES.ELIMINAR_PRODUCTO_DEL_CARRITO,
+      type: TYPES.DELETE_PRODUCT_FROM_CART,
       payload: id
     })
   }
 
-  const limpiarCarrito = () => {
+  const clearCart = () => {
     dispatch({
-      type: TYPES.ELIMINAR_TODO_DEL_CARRITO
+      type: TYPES.DELETE_ALL_FROM_CART
     })
   }
 
 
   return (
     <>
-      <h1>TIENDA ONLINE</h1>
+      <h1>E-COMMERCER</h1>
       <hr />
-      <h2>Productos en Stock</h2>
+      <h2>Products in Stock</h2>
       <div>
         {
-          state.productos.map((producto) => {
-            return <ProductoItem key={producto.id} data={producto} añadirAlCarrito={añadirAlCarrito} />
+          state.products.map((product) => {
+            return <ProductItem key={product.id} data={product} addToCart={addToCart} />
           })
         }
       </div>
 
       <hr />
-      <h2>Carrito de Compras</h2>
-      <button onClick={() => limpiarCarrito()}>Limpiar carrito</button>
+      <h2>Shopping Cart</h2>
+      <button onClick={() => clearCart()}>Clear cart</button>
       <div>
         {
-          state.carrito.length === 0 && <p>No hay productos en el carrito</p>
+          state.cart.length === 0 && <p>There are no products in the cart</p>
         }
 
         {
-          state.carrito.map((productoCarrito) => {
-            return <ProductoCarritoCompras key={productoCarrito.id} data={productoCarrito} eliminarDelCarrito={eliminarDelCarrito} />
+          state.cart.map((productCart) => {
+            return <ShoppingCartProduct key={productCart.id} data={productCart} deleteFromCart={deleteFromCart} />
           })
         }
       </div>
