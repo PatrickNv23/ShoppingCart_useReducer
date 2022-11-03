@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: #0C0D0D;
+}
+
+.title,
+.subtitle_products,
+.subtitle_shopping_cart {
+  text-align: center;
+  padding: 10px;
+}
+
+.container_grid_products,
+.container_grid_shopping_cart {
+  width: 90%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 5px;
+  margin-top: 30px;
+}
+
+.container_buttons {
+  width: 90%;
+  min-height: 120px;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.totalPrice_shoppingCart {
+  grid-column: 4/5;
+}
+
+.btn {
+  width: 100px;
+  min-height: 40px;
+  height: auto;
+  outline: none;
+  border: none;
+  background-color: #2569C3;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn_totalPrice {
+  grid-column: 2/3;
+}
+
+.btn_ClearCart {
+  grid-column: 3/4;
+}
+
+.btn_ClearCart,
+.btn_totalPrice,
+.totalPrice_shoppingCart {
+  grid-row: 2/3;
+  justify-self: center;
+  align-self: center;
+}
+
+.text_NoProductsInCart {
+  text-align: center;
+  padding: 10px;
+}

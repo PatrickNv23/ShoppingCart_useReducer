@@ -34,7 +34,8 @@ export const productsInitialState = {
       "price": 60
     }
   ],
-  cart: []
+  cart: [],
+  totalPriceShoppingCart: 0
 }
 
 export const reducerCart = (state, action) => {
@@ -46,15 +47,23 @@ export const reducerCart = (state, action) => {
         cart: [...state.cart, newProduct]
       };
     }
-    case TYPES.DELETE_PRODUCT_FROM_CART:
+    case TYPES.DELETE_PRODUCT_FROM_CART: {
       return {
         ...state,
         cart: state.cart.filter((product) => product.id !== action.payload)
       }
+    }
+
     case TYPES.DELETE_ALL_FROM_CART: {
       return productsInitialState;
     }
 
+    case TYPES.CALCULATE_TOTAL_PRICE_OF_THE_CART: {
+      return {
+        ...state,
+        totalPriceShoppingCart: state.cart.reduce((previousValue, product) => previousValue + product.price, 0)
+      }
+    }
     default:
       return state;
   }
